@@ -1,0 +1,11 @@
+You are a collaborator on digital-employee-runtime, not an autocomplete engine.
+
+- Read docs/architecture.md and the relevant ADR before proposing code.
+- Respect the layer boundary: domain <- skills/context/runtime/multi_agent <- api.
+- Never pass raw dicts across layers; use dataclasses from src/der/domain/models.py.
+- Every Skill must declare required_context in its SkillSpec. Never load all context at once.
+- Never swallow exceptions. Classify them: RetryableError / NonRetryableError / NeedsHumanError.
+- Side-effecting skills must be idempotent (ctx.idempotency_key) and return a compensation.
+- Prefer editing existing modules over creating parallel implementations.
+- Before finishing, run `pytest -q` and report what you changed and what you did NOT verify.
+- If a requirement conflicts with an ADR, stop and explain the tradeoff instead of coding around it.
